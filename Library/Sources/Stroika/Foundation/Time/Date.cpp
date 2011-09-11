@@ -130,7 +130,9 @@ Date::Date (const wstring& rep, XML)
 // horrible hack - very bad... but hopefully gets us limping along...
 		string tmp = WideStringToASCII (rep);
 		convert_iso8601 (tmp.c_str (), &tm);
-		fJulianDateRep = Safe_jday (MonthOfYear (tm.tm_mon+1), DayOfMonth (tm.tm_mday), Year (tm.tm_year+1900));
+        // SSW 9/16/2011: fixed Julian conversion because day is zero based
+		//fJulianDateRep = Safe_jday (MonthOfYear (tm.tm_mon+1), DayOfMonth (tm.tm_mday), Year (tm.tm_year+1900));
+		fJulianDateRep = Safe_jday (MonthOfYear (tm.tm_mon+1), DayOfMonth (tm.tm_mday+1), Year (tm.tm_year+1900));
 #else
 		AssertNotImplemented ();
 #endif
@@ -285,13 +287,13 @@ wstring	Date::Format4XML () const
 wstring	Date::Format4JScript () const
 {
 	/*
-	 *	From 
+	 *	From
 	 *		http://msdn.microsoft.com/library/default.asp?url=/library/en-us/script56/html/ed737e50-6398-4462-8779-2af3c03f8325.asp
 	 *
-	 *			parse Method (JScript 5.6)  
+	 *			parse Method (JScript 5.6)
 	 *			...
-	 *			The following rules govern what the parse method can successfully parse: 
-	 *			Short dates can use either a "/" or "-" date separator, but must follow the month/day/year format, for example "7/20/96". 
+	 *			The following rules govern what the parse method can successfully parse:
+	 *			Short dates can use either a "/" or "-" date separator, but must follow the month/day/year format, for example "7/20/96".
 	 *
 	 *	See also 		explicit Date (const wstring& rep, Javascript);
 	 */
@@ -495,7 +497,7 @@ int	Time::YearDifference (const Date& lhs, const Date& rhs)
 	Date::DayOfMonth	ld	=	Date::eEmptyDayOfMonth;
 	Date::Year			ly	=	Date::eEmptyYear;
 	lhs.mdy (&lm, &ld, &ly);
-	
+
 	Date::MonthOfYear	rm	=	Date::eEmptyMonthOfYear;
 	Date::DayOfMonth	rd	=	Date::eEmptyDayOfMonth;
 	Date::Year			ry	=	Date::eEmptyYear;
