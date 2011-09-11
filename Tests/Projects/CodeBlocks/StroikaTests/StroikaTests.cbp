@@ -63,8 +63,13 @@
 		<Unit filename="../../../5/Test.cpp" />
 		<Unit filename="../../../6/Test.cpp" />
 		<Unit filename="../../../7/Test.cpp" />
+<<<<<<< HEAD
 		<Unit filename="../../../8/Test.cpp" />
 		<Unit filename="../../../9/Test.cpp" />
+=======
+		<Unit filename="../../../Array/Test.cpp" />
+		<Unit filename="../../../Bag/Test.cpp" />
+>>>>>>> git array, bag, bag_array to pass test suite
 		<Unit filename="main.cpp" />
 		<Unit filename="../../../TestHarness/SimpleClass.cpp" />
 		<Unit filename="../../../TestHarness/SimpleClass.h" />

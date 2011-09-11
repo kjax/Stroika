@@ -2,6 +2,7 @@
 <CodeBlocks_workspace_file>
 	<Workspace title="Stroika">
 <<<<<<< HEAD
+<<<<<<< HEAD
 		<Project filename="../../../Tests/Projects/CodeBlocks/StroikaTests/StroikaTests.cbp" active="1">
 			<Depends filename="Stroika.cbp" />
 		</Project>
@@ -10,5 +11,9 @@
 		<Project filename="../../../Tests/Projects/CodeBlocks/StroikaTests/StroikaTests.cbp" />
 		<Project filename="Stroika.cbp" active="1" />
 >>>>>>> get all array, bag, bag_array to compile
+=======
+		<Project filename="../../../Tests/Projects/CodeBlocks/StroikaTests/StroikaTests.cbp" active="1" />
+		<Project filename="Stroika.cbp" />
+>>>>>>> git array, bag, bag_array to pass test suite
 	</Workspace>
 </CodeBlocks_workspace_file>

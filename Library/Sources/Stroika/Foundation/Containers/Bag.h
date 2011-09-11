@@ -50,7 +50,6 @@
 #include	"../Memory/SharedByValue.h"
 
 #include    "Iterator.h"
-#include	"../Memory/SharedByValue.h"
 
 
 
@@ -263,8 +262,8 @@ namespace	Stroika {
                      * static type, but this would have been a waste of time and memory.
                      */
                      // SSW 8/8/2011: If I don't scope fIterator, I get an error in gcc 'fIterator was not declared in this scope'
-                     dynamic_cast<BagMutatorRep<T>*> (Iterator<T>::fIterator)->UpdateCurrent ();
-                     //dynamic_cast<BagMutatorRep<T>*> (fIterator)->UpdateCurrent ();
+                     dynamic_cast<BagMutatorRep<T>*> (Iterator<T>::fIterator)->UpdateCurrent (newValue);
+                     //dynamic_cast<BagMutatorRep<T>*> (fIterator)->UpdateCurrent (newValue);
                 }
 
                 // class BagRep<T>
