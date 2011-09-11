@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_workspace_file>
 	<Workspace title="Stroika">
+<<<<<<< HEAD
 		<Project filename="../../../Tests/Projects/CodeBlocks/StroikaTests/StroikaTests.cbp" active="1">
 			<Depends filename="Stroika.cbp" />
 		</Project>
 		<Project filename="Stroika.cbp" />
+=======
+		<Project filename="../../../Tests/Projects/CodeBlocks/StroikaTests/StroikaTests.cbp" />
+		<Project filename="Stroika.cbp" active="1" />
+>>>>>>> get all array, bag, bag_array to compile
 	</Workspace>
 </CodeBlocks_workspace_file>
