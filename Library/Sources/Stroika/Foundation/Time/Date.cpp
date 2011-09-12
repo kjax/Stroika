@@ -130,9 +130,7 @@ Date::Date (const wstring& rep, XML)
 // horrible hack - very bad... but hopefully gets us limping along...
 		string tmp = WideStringToASCII (rep);
 		convert_iso8601 (tmp.c_str (), &tm);
-        // SSW 9/16/2011: fixed Julian conversion because day is zero based
-		//fJulianDateRep = Safe_jday (MonthOfYear (tm.tm_mon+1), DayOfMonth (tm.tm_mday), Year (tm.tm_year+1900));
-		fJulianDateRep = Safe_jday (MonthOfYear (tm.tm_mon+1), DayOfMonth (tm.tm_mday+1), Year (tm.tm_year+1900));
+		fJulianDateRep = Safe_jday (MonthOfYear (tm.tm_mon+1), DayOfMonth (tm.tm_mday), Year (tm.tm_year+1900));
 #else
 		AssertNotImplemented ();
 #endif
