@@ -49,6 +49,9 @@
 		<Unit filename="../../Sources/Stroika/Foundation/Characters/CodePage.cpp" />
 		<Unit filename="../../Sources/Stroika/Foundation/Characters/CodePage.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Characters/CodePage.inl" />
+		<Unit filename="../../Sources/Stroika/Foundation/Characters/Format.cpp" />
+		<Unit filename="../../Sources/Stroika/Foundation/Characters/Format.h" />
+		<Unit filename="../../Sources/Stroika/Foundation/Characters/Format.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/Characters/LineEndings.cpp" />
 		<Unit filename="../../Sources/Stroika/Foundation/Characters/LineEndings.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Characters/LineEndings.inl" />
@@ -70,6 +73,9 @@
 		<Unit filename="../../Sources/Stroika/Foundation/Characters/TString.cpp" />
 		<Unit filename="../../Sources/Stroika/Foundation/Characters/TString.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Characters/TString.inl" />
+		<Unit filename="../../Sources/Stroika/Foundation/Characters/Tokenize.cpp" />
+		<Unit filename="../../Sources/Stroika/Foundation/Characters/Tokenize.h" />
+		<Unit filename="../../Sources/Stroika/Foundation/Characters/Tokenize.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/Configuration/Common.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Configuration/Common.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/Configuration/Private/Defaults_Characters_Character_.h" />
@@ -89,31 +95,36 @@
 		<Unit filename="../../Sources/Stroika/Foundation/Configuration/Private/Defaults_Memory_Common_.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Configuration/StroikaConfig-ReadMe.txt" />
 		<Unit filename="../../Sources/Stroika/Foundation/Configuration/StroikaConfig.h" />
+		<Unit filename="../../Sources/Stroika/Foundation/Containers/Array.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Bag.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Bag.inl" />
+		<Unit filename="../../Sources/Stroika/Foundation/Containers/Bag_Array.cpp" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Bag_Array.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Bag_Array.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Bag_LinkedList.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Bag_LinkedList.inl" />
+		<Unit filename="../../Sources/Stroika/Foundation/Containers/Collection.h" />
+		<Unit filename="../../Sources/Stroika/Foundation/Containers/Collection.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Common.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Common.inl" />
-		<Unit filename="../../Sources/Stroika/Foundation/Containers/Iterator.cpp" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Iterator.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Iterator.inl" />
-		<Unit filename="../../Sources/Stroika/Foundation/Containers/LRUCache.cpp" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/LRUCache.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/LRUCache.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Private/Array.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Private/Array.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Private/LinkedList.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Private/LinkedList.inl" />
-		<Unit filename="../../Sources/Stroika/Foundation/Containers/SetUtils.cpp" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/SetUtils.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/SetUtils.inl" />
-		<Unit filename="../../Sources/Stroika/Foundation/Containers/TimedCache.cpp" />
+		<Unit filename="../../Sources/Stroika/Foundation/Containers/Tally.h" />
+		<Unit filename="../../Sources/Stroika/Foundation/Containers/Tally.inl" />
+		<Unit filename="../../Sources/Stroika/Foundation/Containers/Tally_Array.h" />
+		<Unit filename="../../Sources/Stroika/Foundation/Containers/Tally_Array.inl" />
+		<Unit filename="../../Sources/Stroika/Foundation/Containers/Tally_LinkedList.h" />
+		<Unit filename="../../Sources/Stroika/Foundation/Containers/Tally_LinkedList.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/TimedCache.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/TimedCache.inl" />
-		<Unit filename="../../Sources/Stroika/Foundation/Containers/VectorUtils.cpp" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/VectorUtils.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/VectorUtils.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/Cryptography/Base64.cpp" />
@@ -196,12 +207,8 @@
 		<Unit filename="../../Sources/Stroika/Foundation/Execution/Platform/Windows/HRESULTErrorException.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Execution/Platform/Windows/HRESULTErrorException.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/Execution/Platform/Windows/ResourceAccessor.cpp">
-<<<<<<< HEAD
-			<Option target="&lt;{~None~}&gt;" />
-=======
 			<Option compile="0" />
 			<Option link="0" />
->>>>>>> bc651da... move array implementation to private directory and namespace it
 		</Unit>
 		<Unit filename="../../Sources/Stroika/Foundation/Execution/Platform/Windows/ResourceAccessor.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Execution/Platform/Windows/ResourceAccessor.inl" />
@@ -250,6 +257,7 @@
 		<Unit filename="../../Sources/Stroika/Foundation/IO/FileUtils.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/IO/Network/URL.cpp" />
 		<Unit filename="../../Sources/Stroika/Foundation/IO/Network/URL.h" />
+		<Unit filename="../../Sources/Stroika/Foundation/IO/Network/URL.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/Linguistics/Words.cpp" />
 		<Unit filename="../../Sources/Stroika/Foundation/Linguistics/Words.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Linguistics/Words.inl" />
@@ -319,6 +327,171 @@
 		<Unit filename="../../Sources/Stroika/Foundation/Time/TimeOfDay.cpp" />
 		<Unit filename="../../Sources/Stroika/Foundation/Time/TimeOfDay.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Time/TimeOfDay.inl" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_BiDiLayoutEngine.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_CodePage.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_Command.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_Config.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_FlavorPackage.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_GDI.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_HiddenText.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_IdleManager.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_LineBasedPartition.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_Marker.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_MarkerCover.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_MultiRowTextImager.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_PartitioningTextImager.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_SimpleTextStore.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_SpellCheckEngine.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_StandardStyledTextImager.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_StandardStyledTextInteractor.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_StyledTextEmbeddedObjects.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_StyledTextIO.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_StyledTextIO_HTML.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_StyledTextIO_PlainText.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_StyledTextIO_RTF.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_StyledTextImager.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_Support.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_TextBreaks.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_TextImager.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_TextInteractor.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_TextInteractorMixins.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_TextStore.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_WordProcessor.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_WordWrappedTextImager.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Headers/Led_WordWrappedTextInteractor.h" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/LedLibrary.sln" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/LedLibrary.vcxproj" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/LedLibrary.vcxproj.filters" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/README.txt" />
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/LedOptionsSupport.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_BiDiLayoutEngine.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_CodePage.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_Command.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_FlavorPackage.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_GDI.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_HiddenText.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_IdleManager.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_LineBasedPartition.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_Marker.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_MarkerCover.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_MultiRowTextImager.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_PartitioningTextImager.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_SimpleTextStore.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_SpellCheckEngine.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_StandardStyledTextImager.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_StandardStyledTextInteractor.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_StyledTextEmbeddedObjects.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_StyledTextIO.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_StyledTextIO_HTML.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_StyledTextIO_PlainText.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_StyledTextIO_RTF.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_StyledTextImager.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_Support.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_TextBreaks.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_TextImager.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_TextInteractor.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_TextInteractorMixins.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_TextStore.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_WordProcessor.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_WordWrappedTextImager.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/Led/Sources/Led_WordWrappedTextInteractor.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="../../Sources/Stroika/Frameworks/StroikaPreComp.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />
