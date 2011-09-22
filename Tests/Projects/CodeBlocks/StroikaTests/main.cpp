@@ -57,7 +57,6 @@ int main()
         cout << "Testing Arrays" << endl;
         Test_Arrays ();
     #endif
-<<<<<<< HEAD
 	#if 1
         extern  int Test_Bags ();
         cout << "Testing Bag" << endl;
@@ -69,12 +68,6 @@ int main()
         Test_LinkedList ();
     #endif
     return 0;
-=======
-     #if 1
-        extern  int Test_Bags ();
-        cout << "Testing Bag" << endl;
-        Test_Bags ();
-    #endif   return 0;
->>>>>>> git array, bag, bag_array to pass test suite
+
 }
 

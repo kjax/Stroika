@@ -2,11 +2,7 @@
  * Copyright(c) Sophist Solutions, Inc. 1990-2011.  All rights reserved
  */
 
-<<<<<<< HEAD
 #include "Private/Array.h"
-=======
-#include "Array.h"
->>>>>>> get all array, bag, bag_array to compile
 
 #include "../Memory/BlockAllocated.h"
 
@@ -15,11 +11,8 @@ namespace	Stroika {
 	namespace	Foundation {
 		namespace	Containers {
 
-<<<<<<< HEAD
 		    using namespace Private;
 
-=======
->>>>>>> get all array, bag, bag_array to compile
 
             // class Bag_Array<T>
             template	<typename T>	inline	Bag_Array<T>::Bag_Array (const Bag_Array<T>& bag) :
@@ -69,11 +62,7 @@ namespace	Stroika {
                     Bag_ArrayMutatorRep (Bag_ArrayRep<T>& owner);
 
                     virtual	bool	Done () const override;
-<<<<<<< HEAD
                     virtual	bool	More (T* current) override;
-=======
-                    virtual	bool	More () override;
->>>>>>> get all array, bag, bag_array to compile
                     virtual	T		Current () const override;
 
                     virtual	IteratorRep<T>*		Clone () const override;
@@ -101,20 +90,12 @@ namespace	Stroika {
 
             template	<class	T>	inline	void*	Bag_ArrayMutatorRep<T>::operator new (size_t size)
             {
-<<<<<<< HEAD
                 return (Memory::BlockAllocated<Bag_ArrayMutatorRep<T> >::operator new (size));
-=======
-                return (Stroika::Foundation::Memory::BlockAllocated<Bag_ArrayMutatorRep<T> >::operator new (size));
->>>>>>> get all array, bag, bag_array to compile
             }
 
             template	<class	T>	inline	void	Bag_ArrayMutatorRep<T>::operator delete (void* p)
             {
-<<<<<<< HEAD
                 Memory::BlockAllocated<Bag_ArrayMutatorRep<T> >::operator delete (p);
-=======
-                Stroika::Foundation::Memory::BlockAllocated<Bag_ArrayMutatorRep<T> >::operator delete (p);
->>>>>>> get all array, bag, bag_array to compile
             }
 
             template	<class	T>	Bag_ArrayMutatorRep<T>::Bag_ArrayMutatorRep (Bag_ArrayRep<T>& owner) :
@@ -128,15 +109,9 @@ namespace	Stroika {
                 return (fIterator.Done ());
             }
 
-<<<<<<< HEAD
             template	<class	T>	bool	Bag_ArrayMutatorRep<T>::More (T* current)
             {
                 return (fIterator.More (current));
-=======
-            template	<class	T>	bool	Bag_ArrayMutatorRep<T>::More ()
-            {
-                return (fIterator.More ());
->>>>>>> get all array, bag, bag_array to compile
             }
 
             template	<class	T>	T	Bag_ArrayMutatorRep<T>::Current () const
@@ -172,20 +147,12 @@ namespace	Stroika {
 
             template	<class	T>	inline	void*	Bag_ArrayRep<T>::operator new (size_t size)
             {
-<<<<<<< HEAD
                 return (Memory::BlockAllocated<Bag_ArrayRep<T> >::operator new (size));
-=======
-                return (Stroika::Foundation::Memory::BlockAllocated<Bag_ArrayRep<T> >::operator new (size));
->>>>>>> get all array, bag, bag_array to compile
             }
 
             template	<class	T>	inline	void	Bag_ArrayRep<T>::operator delete (void* p)
             {
-<<<<<<< HEAD
                 Memory::BlockAllocated<Bag_ArrayRep<T> >::operator delete (p);
-=======
-                Stroika::Foundation::Memory::BlockAllocated<Bag_ArrayRep<T> >::operator delete (p);
->>>>>>> get all array, bag, bag_array to compile
             }
 
             template	<typename T>	inline	Bag_ArrayRep<T>::Bag_ArrayRep () :
@@ -229,32 +196,21 @@ namespace	Stroika {
 
             template	<typename T>	void	Bag_ArrayRep<T>::Add (T item)
             {
-<<<<<<< HEAD
                 fData.InsertAt (item, GetLength ());
             }
 
 
-=======
-                fData.InsertAt (item, GetLength () + 1);
-            }
-
->>>>>>> get all array, bag, bag_array to compile
             template	<typename T>	void	Bag_ArrayRep<T>::Remove (T item)
             {
                 /*
                  *		Iterate backwards since removing from the end of an array
                  *	will be faster.
                  */
-<<<<<<< HEAD
 #if qIteratorsRequireNoArgContructorForT
                 T temp;
 #endif
                 for (BackwardArrayIterator<T> it (fData); it.More (&temp);) {
                     if (temp == item) {
-=======
-                for (BackwardArrayIterator<T> it (fData); it.More ();) {
-                    if (it.Current () == item) {
->>>>>>> get all array, bag, bag_array to compile
                         fData.RemoveAt (it.CurrentIndex ());
                         return;
                     }

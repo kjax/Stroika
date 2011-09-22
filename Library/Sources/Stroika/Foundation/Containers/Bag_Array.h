@@ -3,7 +3,6 @@
  */
 #ifndef	_Stroika_Foundation_Containers_Bag_Array_h_
 #define	_Stroika_Foundation_Containers_Bag_Array_h_
-<<<<<<< HEAD
 
 #include	"../StroikaPreComp.h"
 
@@ -35,38 +34,9 @@ namespace	Stroika {
 		}
     }
 }
-=======
-
-
-#include	"Bag.h"
 
 
 
-namespace	Stroika {
-	namespace	Foundation {
-		namespace	Containers {
-
-            template	<class T>	class	Bag_ArrayRep;
-            template	<class T>	class	Bag_Array : public Bag<T> {
-                public:
-                    Bag_Array ();
-                    Bag_Array (const Bag<T>& bag);
-                    Bag_Array (const Bag_Array<T>& bag);
-                    Bag_Array (const T* items, size_t size);
->>>>>>> get all array, bag, bag_array to compile
-
-                    nonvirtual	Bag_Array<T>& operator= (const Bag_Array<T>& bag);
-
-                    nonvirtual	size_t	GetSlotsAlloced () const;
-                    nonvirtual	void	SetSlotsAlloced (size_t slotsAlloced);
-
-                private:
-                    nonvirtual	const Bag_ArrayRep<T>*	GetRep () const;
-                    nonvirtual	Bag_ArrayRep<T>*		GetRep ();
-            };
-		}
-    }
-}
 
 
 #endif	/*_Stroika_Foundation_Containers_Bag_Array_h_ */
@@ -81,11 +51,4 @@ namespace	Stroika {
  #include "Bag_Array.inl"
 
 
-<<<<<<< HEAD
-=======
-
-
-
-#endif	/*_Stroika_Foundation_Containers_Bag_Array_h_ */
->>>>>>> get all array, bag, bag_array to compile
 

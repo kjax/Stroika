@@ -13,7 +13,6 @@ namespace	Stroika {
 	namespace	Foundation {
 		namespace	Containers {
 
-<<<<<<< HEAD
              // class Bag<T>
             template	<typename T>	inline	Bag<T>::Bag (const Bag<T>& bag) :
                 fRep (bag.fRep)
@@ -25,8 +24,6 @@ namespace	Stroika {
             {
             }
 
-=======
->>>>>>> get all array, bag, bag_array to compile
             template	<class T>	Bag<T>::Bag () :
                 fRep (0, &Clone)
             {
@@ -39,7 +36,6 @@ namespace	Stroika {
                 *this = Bag_Array<T> (items, size);
             }
 
-<<<<<<< HEAD
             template	<typename T>	inline	Bag<T>&	Bag<T>::operator= (const Bag<T>& bag)
             {
                 fRep = bag.fRep;
@@ -125,8 +121,6 @@ namespace	Stroika {
                 it.More ();
                 return it;
             }
-=======
->>>>>>> get all array, bag, bag_array to compile
 
             template	<class T> void	Bag<T>::Add (T item)
             {
@@ -161,11 +155,7 @@ namespace	Stroika {
             template	<class T> size_t	Bag<T>::TallyOf (T item) const
             {
                 size_t count = 0;
-<<<<<<< HEAD
                 ForEach (T, it, (*this)) {
-=======
-                ForEach (T, it, *this) {
->>>>>>> get all array, bag, bag_array to compile
                     if (it.Current () == item) {
                         count++;
                     }
@@ -224,7 +214,6 @@ namespace	Stroika {
                 return (temp);
             }
 
-<<<<<<< HEAD
             // operator!=
             template	<typename T>	inline	bool	operator!= (const Bag<T>& lhs, const Bag<T>& rhs)
             {
@@ -295,8 +284,6 @@ namespace	Stroika {
             {
                 return (fRep.GetPointer ());
             }
-=======
->>>>>>> get all array, bag, bag_array to compile
 		}
 	}
 }
