@@ -122,6 +122,10 @@
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Tally_Array.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Tally_LinkedList.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Tally_LinkedList.inl" />
+<<<<<<< HEAD
+=======
+		<Unit filename="../../Sources/Stroika/Foundation/Containers/TimedCache.cpp" />
+>>>>>>> ea5c152528f9dff8e5d3046e91f41c9eac1f9d0c
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/TimedCache.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/TimedCache.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/VectorUtils.h" />
