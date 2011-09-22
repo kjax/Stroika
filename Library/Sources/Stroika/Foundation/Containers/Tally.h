@@ -20,6 +20,10 @@ namespace	Stroika {
 
 			template	<typename T>	class	TallyEntry {
 				public:
+#if qIteratorsRequireNoArgContructorForT
+					TallyEntry () {}
+#endif
+
 					TallyEntry (T item);
 					TallyEntry (T item, size_t count);
 
@@ -38,6 +42,10 @@ namespace	Stroika {
             template	<typename T>	bool	operator== (const Tally<T>& lhs, const Tally<T>& rhs);
             template	<typename T>	bool	operator!= (const Tally<T>& lhs, const Tally<T>& rhs);
 
+			template	<typename T> class	TallyIterator : public Iterator<TallyEntry<T> > {
+				public:
+					TallyIterator (IteratorRep<TallyEntry<T> >* it);
+			};
 
 			// Must be more careful about copying TallyMutators...Now that iterators are copyable...
 			template	<typename T> class	TallyMutator : public Iterator<TallyEntry<T> > {
@@ -92,7 +100,7 @@ namespace	Stroika {
 					nonvirtual	operator TallyMutator<T> ();
 
 					// Support for ranged for, and stl syntax in general
-                    nonvirtual  Iterator<T>    begin () const;
+                    nonvirtual  Iterator<TallyEntry<T> >    begin () const;
                     nonvirtual  IterationState end () const;
 
 				protected:
