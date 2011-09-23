@@ -27,7 +27,6 @@ using	namespace	Stroika::Foundation::Containers;
 
 
 
-
 namespace	{
 
 static	void	TallyIteratorTests(Tally<size_t>& s)
@@ -54,13 +53,11 @@ static	void	TallyIteratorTests(Tally<size_t>& s)
 			//ForEach (size_t, it, s) {
 			for (Iterator<TallyEntry<size_t> > It = s.begin (); It != s.end (); ++It) {
 				for (size_t i = 1; i <= kTestSize; i++) {
-cerr << "i = " << i << endl;
 					VerifyTestResult (s.Contains (i));
 					VerifyTestResult (s.GetLength () == kTestSize - i + 1);
 					s.Remove (i);
 					VerifyTestResult (not s.Contains (i-1));
 				}
-cerr << "  now length = " << s.GetLength () << endl;
 			}
 			VerifyTestResult (s.IsEmpty ());
 			VerifyTestResult (s.GetLength () == 0);
