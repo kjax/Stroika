@@ -6,10 +6,14 @@
 
 #include	"../Debug/Assertions.h"
 
+// we allow fIterator to equal nullptr, as a sentinal value during iteration, signaling that iteration is Done
+#define	qIteratorUsingNullRepAsSentinalValue	1
+
 
 namespace	Stroika {
 	namespace	Foundation {
 		namespace	Containers {
+
             // class IteratorRep<T>
             template	<typename T> inline	IteratorRep<T>::IteratorRep ()
             {
@@ -24,16 +28,24 @@ namespace	Stroika {
                 fIterator (0),
                 fCurrent (from.fCurrent)
             {
-                RequireNotNull (from.fIterator);
-                fIterator = from.fIterator->Clone ();
-                EnsureNotNull (fIterator);
+#if qIteratorUsingNullRepAsSentinalValue
+				if (from.fIterator != nullptr) {
+#endif
+					RequireNotNull (from.fIterator);
+					fIterator = from.fIterator->Clone ();
+					EnsureNotNull (fIterator);
+#if qIteratorUsingNullRepAsSentinalValue
+				}
+#endif
             }
 
             template	<typename T> inline	Iterator<T>::Iterator (IteratorRep<T>* it) :
                 fIterator (it)
             {
-                RequireNotNull (it);
-                EnsureNotNull (fIterator);
+#if !qIteratorUsingNullRepAsSentinalValue
+				RequireNotNull (it);
+				EnsureNotNull (fIterator);
+#endif
             }
 
             template	<typename T> inline	Iterator<T>::~Iterator ()
@@ -75,9 +87,12 @@ namespace	Stroika {
                 More ();
             }
 
-            template	<typename T> inline bool   Iterator<T>::operator!= (IterationState rhs)
+            template	<typename T> inline bool   Iterator<T>::operator!= (Iterator rhs)
             {
-                return (not fIterator->Done ());
+            	if (rhs.fIterator == nullptr) {
+					return (not fIterator->Done ());
+            	}
+                return (fIterator != rhs.fIterator);
             }
 		}
     }

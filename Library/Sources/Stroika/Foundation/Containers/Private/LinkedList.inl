@@ -554,7 +554,7 @@ namespace	Stroika {
 
 					}
 					this->fSuppressMore = false;
-					if (not this->Done ()) {
+					if ((current != nullptr) and (not this->Done ())) {
 						*current = this->fCurrent->fItem;
 					}
 					this->Invariant ();

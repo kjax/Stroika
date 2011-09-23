@@ -136,9 +136,6 @@
 namespace	Stroika {
 	namespace	Foundation {
 		namespace	Containers {
-           enum IterationState  {
-                kAtEnd = true
-            };
 
             template	<typename T> class	IteratorRep;
             template	<typename T> class	Iterator {
@@ -156,7 +153,7 @@ namespace	Stroika {
                     // support for Range based for, and stl style iteration in general (containers must also support begin, end)
                     nonvirtual  T       operator* () const;
                     nonvirtual  void    operator++ ();
-                    nonvirtual  bool    operator!= (IterationState rhs);
+                    nonvirtual  bool    operator!= (Iterator rhs);
 
 
                 public:
@@ -168,6 +165,33 @@ namespace	Stroika {
                     T               fCurrent;   // SSW 9/19/2011: naive impementation that requires a no-arg constructor for T and has to build a T before being asked for current
             };
 
+			/*
+				Support for ranged for syntax: for (it : v) { it.Current (); }
+				This typedef lets you easily construct iterators other than the basic
+				iterator for the container.
+				Sample usage:
+				typedef	RangedForIterator<Tally<T>, TallyMutator<T> >		Mutator;
+			*/
+			template	<typename Container, typename IteratorClass>	class	RangedForIterator {
+				public:
+					RangedForIterator (Container& t) :
+						fIt (t)
+					{
+					}
+
+					nonvirtual  IteratorClass    begin () const
+					{
+						return fIt;
+					}
+
+					IteratorClass end () const
+					{
+						return (nullptr);
+					}
+
+				private:
+					IteratorClass	fIt;
+			};
 
 
             /*
@@ -189,17 +213,12 @@ namespace	Stroika {
             };
 
             /*
-             * ForEach Macros.
+             For macro:
+             This will be removed when compilers support ranged for. Just replace For with for, and the comma with a colon
+             For (it, myBag) with for (it : myBag)
              */
+			#define	For(_it,_Container)			for (auto _it = _Container.begin (); _it != _Container.end (); ++_it)
 
-            #if		1
-                #define	ForEach(T,It,Init)			for (Iterator<T > It = Init.begin (); It != Init.end (); ++It)
-                // SSW 9/20/2011: note that ForEachT is inadequote for ranged for, because can't use begin -- how would it know what to return
-                #define	ForEachT(ItT,T,It,Init)		for (ItT<T > It (Init); It != Init.end (); ++It)
-            #else
-                #define	ForEach(T,It,Init)			for (Iterator<T > It (Init); It.More ();)
-                #define	ForEachT(ItT,T,It,Init)		for (ItT<T > It (Init); It.More ();)
-            #endif
 
 
 		}

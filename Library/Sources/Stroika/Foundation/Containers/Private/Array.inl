@@ -117,7 +117,9 @@ namespace	Stroika {
                     this->fSuppressMore = false;
                     Invariant ();
                     if (not Done ()) {
-                        *current = fCurrent->fItem;
+                    	if (current != nullptr) {
+							*current = fCurrent->fItem;
+                    	}
                         return true;
                     }
 
@@ -633,7 +635,7 @@ namespace	Stroika {
                     }
 
                     this->fSuppressMore = false;
-                    if (not Done ()) {
+                    if ((current != nullptr) and (not Done ())) {
                         *current = (*this->fCurrent).fItem;
                     }
                     Invariant ();

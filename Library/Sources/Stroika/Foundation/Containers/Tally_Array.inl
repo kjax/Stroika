@@ -21,8 +21,8 @@ namespace	Stroika {
 
 
 			template	<typename T>	class	Tally_ArrayMutatorRep;
-			template	<typename T>	class	Tally_ArrayRep : public TallyRep<T> {
 
+			template	<typename T>	class	Tally_ArrayRep : public TallyRep<T> {
 				public:
 					Tally_ArrayRep ();
 
