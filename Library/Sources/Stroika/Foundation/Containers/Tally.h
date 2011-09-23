@@ -14,20 +14,10 @@
 
 
 
-/*
- * TODO:
- *		(o)		Class Documentation
- *		(o)		TallyEntry<> should be a nested type under Tally (Tally::Entry)
- */
-
-
 namespace	Stroika {
 	namespace	Foundation {
 		namespace	Containers {
 
-
-
-			
 			template	<typename T>	class	TallyEntry {
 				public:
 #if qIteratorsRequireNoArgContructorForT
@@ -73,12 +63,6 @@ namespace	Stroika {
 			};
 
 
-
-			/*
-			 * DESCRIPTION:
-			 *		A Tally is like a Bag<> - except that it keeps COUNT of how many of a given thing are in it.
-			 *	As the name implies, its very handy for counting things.
-			 */
 			template	<typename T> class	Tally {
 				public:
 					Tally ();
