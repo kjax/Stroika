@@ -23,6 +23,11 @@ namespace	Stroika {
             {
             }
 
+            template	<typename T> inline	bool	IteratorRep<T>::Done () const
+            {
+                return not const_cast<IteratorRep<T>*> (this)->More (nullptr, false);
+            }
+
             // class Iterator<T>
             template	<typename T> inline	Iterator<T>::Iterator (const Iterator<T>& from) :
                 fIterator (0),
@@ -68,7 +73,7 @@ namespace	Stroika {
             template	<typename T> inline	bool	Iterator<T>::More ()
             {
                 RequireNotNull (fIterator);
-                return (fIterator->More (&fCurrent));
+                return (fIterator->More (&fCurrent, true));
             }
 
             template	<typename T> inline	T	Iterator<T>::Current () const

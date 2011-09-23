@@ -55,7 +55,9 @@ static	void	BagIteratorTests(Bag<size_t>& s)
 		}
 
 		{
+cerr << "made it here,  length = " << s.GetLength () << endl;
 			For (it, s) {
+cerr << "here length = " << s.GetLength () << endl;
 				for(size_t i = 1; i <= kTestSize; i++) {
 					VerifyTestResult(s.Contains(i));
 					VerifyTestResult(s.GetLength() == kTestSize - i + 1);
@@ -64,6 +66,7 @@ static	void	BagIteratorTests(Bag<size_t>& s)
 					VerifyTestResult(s.GetLength() == kTestSize - i);
 				}
 			}
+cerr << "length = " << s.GetLength () << endl;
 			VerifyTestResult(s.IsEmpty());
 			VerifyTestResult(s.GetLength() == 0);
 		}

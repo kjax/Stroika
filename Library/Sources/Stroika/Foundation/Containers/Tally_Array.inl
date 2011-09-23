@@ -60,8 +60,7 @@ namespace	Stroika {
 				public:
 					Tally_ArrayMutatorRep (Tally_ArrayRep<T>& owner);
 
-					virtual	bool			Done () const override;
-					virtual	bool			More (TallyEntry<T>* current) override;
+					virtual	bool			More (TallyEntry<T>* current, bool advance) override;
 
 					virtual	IteratorRep<TallyEntry<T> >*	Clone () const override;
 
@@ -118,14 +117,10 @@ namespace	Stroika {
 			{
 			}
 
-			template	<class	T>	bool	Tally_ArrayMutatorRep<T>::Done () const
-			{
-				return (fIterator.Done());
-			}
 
-			template	<class	T>	bool	Tally_ArrayMutatorRep<T>::More (TallyEntry<T>* current)
+			template	<class	T>	bool	Tally_ArrayMutatorRep<T>::More (TallyEntry<T>* current, bool advance)
 			{
-				return (fIterator.More(current));
+				return (fIterator.More(current, advance));
 			}
 
 			template	<typename T>	IteratorRep<TallyEntry<T> >*	Tally_ArrayMutatorRep<T>::Clone () const

@@ -54,8 +54,7 @@ namespace	Stroika {
 					TallyIterateOnTRep (IteratorRep<TallyEntry<T> >* it);
 					~TallyIterateOnTRep ();
 
-					virtual	bool			Done () const override;
-					virtual	bool			More (T* current) override;
+					virtual	bool			More (T* current, bool advance) override;
 					virtual	IteratorRep<T>*	Clone () const override;
 
 				private:
@@ -322,21 +321,15 @@ namespace	Stroika {
 				delete fIt;
 			}
 
-			template	<typename T> inline	bool	TallyIterateOnTRep<T>::Done () const
-			{
-				RequireNotNull (fIt);
-				return (fIt->Done ());
-			}
-
-			template	<typename T> inline	bool	TallyIterateOnTRep<T>::More (T* current)
+			template	<typename T> inline	bool	TallyIterateOnTRep<T>::More (T* current, bool advance)
 			{
 				RequireNotNull (fIt);
 				if (current == nullptr) {
-					return fIt->More (nullptr);
+					return fIt->More (nullptr, false);
 				}
 				else {
 					TallyEntry<T> xx (*current);
-					bool	result = fIt->More (&xx);
+					bool	result = fIt->More (&xx, advance);
 					*current = xx.fItem;
 					return (result);
 				}

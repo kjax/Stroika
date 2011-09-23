@@ -140,7 +140,7 @@ namespace	Stroika {
             template	<typename T> class	IteratorRep;
             template	<typename T> class	Iterator {
                 public:
-                     Iterator (IteratorRep<T>* it);
+					Iterator (IteratorRep<T>* it);
                     Iterator (const Iterator<T>& from);
                     ~Iterator ();
 
@@ -207,9 +207,9 @@ namespace	Stroika {
                     virtual	~IteratorRep ();
 
                 public:
-                    virtual	bool			More (T* current)   = 0;
+                    virtual	bool			More (T* current, bool advance)   = 0;
                     virtual	IteratorRep<T>*	Clone () const		= 0;
-                    virtual bool            Done () const       = 0;
+                    nonvirtual bool         Done () const;
             };
 
             /*
