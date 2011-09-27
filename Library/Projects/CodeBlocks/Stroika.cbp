@@ -100,6 +100,8 @@
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Bag_LinkedList.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Collection.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Collection.inl" />
+		<Unit filename="../../Sources/Stroika/Foundation/Containers/CollectionElementTraits.h" />
+		<Unit filename="../../Sources/Stroika/Foundation/Containers/CollectionElementTraits.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Common.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Common.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Iterator.h" />
@@ -243,6 +245,9 @@
 		<Unit filename="../../Sources/Stroika/Foundation/IO/FileBusyException.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/IO/FileFormatException.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/IO/FileFormatException.inl" />
+		<Unit filename="../../Sources/Stroika/Foundation/IO/FileSystem/Directory.cpp" />
+		<Unit filename="../../Sources/Stroika/Foundation/IO/FileSystem/Directory.h" />
+		<Unit filename="../../Sources/Stroika/Foundation/IO/FileSystem/Directory.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/IO/FileSystem/FileUtils.cpp" />
 		<Unit filename="../../Sources/Stroika/Foundation/IO/FileSystem/FileUtils.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/IO/FileSystem/FileUtils.inl" />
