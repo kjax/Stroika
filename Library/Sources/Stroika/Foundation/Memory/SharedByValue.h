@@ -10,7 +10,7 @@
 
 
 
-namespace	Stroika {	
+namespace	Stroika {
 	namespace	Foundation {
 		namespace	Memory {
 
@@ -58,6 +58,8 @@ namespace	Stroika {
 						nonvirtual	const T*	GetPointer () const;
 						nonvirtual	T*			GetPointer ();
 
+						nonvirtual	const T*	GetConstPointer () const;
+
 					public:
 						/*
 						 * These operators require that the underlying ptr is non-nil.
@@ -76,7 +78,7 @@ namespace	Stroika {
 					private:
 						nonvirtual	void	BreakReferences_ ();
 				};
-	
+
 		}
 	}
 }
