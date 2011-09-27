@@ -81,7 +81,7 @@ namespace	Stroika {
 
             template	<typename T>	inline	Iterator<T>    Bag<T>::end () const
             {
-                return (Iterator<T>::GetSentinal ());
+                return (Iterator<T> (nullptr));
             }
 
             template	<typename T>	inline	BagMutator<T>    Bag<T>::begin ()
