@@ -90,18 +90,13 @@ namespace	Stroika {
                     Iterator ();	// Never implemented - illegal
 
                 public:
-                    // support for Range based for, and stl style iteration in general (containers must also support begin, end)
                     nonvirtual  T       operator* () const;
                     nonvirtual  void    operator++ ();
                     nonvirtual  void    operator++ (int);
                     nonvirtual  bool    operator!= (Iterator rhs) const;
 
-
                     nonvirtual  bool    operator== (Iterator rhs) const;
 
-					// Synonyms for above, sometimes making code more readable
-					// Current -> operator*
-					// Done -> (it != container.end ())
                 public:
                     nonvirtual	T		Current () const;
                     nonvirtual	bool	Done () const;
@@ -129,7 +124,7 @@ namespace	Stroika {
 						Done -> More (null, false)
 
 						(note that for performance and safety reasons the iterator envelope actually
-						passes fCurrent into More when implenenting ++it
+						passes fCurrent into More when implementing ++it)
 			*/
             template	<typename T> class	Iterator<T>::Rep {
                 protected:
