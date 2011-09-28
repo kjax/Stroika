@@ -4,61 +4,59 @@
 #ifndef	_Stroika_Foundation_Containers_Iterator_h_
 #define	_Stroika_Foundation_Containers_Iterator_h_	1
 
+
+
 /*
- *		THIS DOC OBSOLETE BUT HAS SOME NICE WORDING, SEE BELOW FOR CURRENT DOC
- *		Iterators allow ordered traversal of a Collection. In general, the only
- *	guarantee about iteration order is that it will remain the same as long as
- *	the Collection has not been modified. Difference subclasses of Collection
- *	more narrowly specify the details of traversal order: for example a Stack
- *	will always iterate from the top-most to the bottom-most item.
- *
- *		Iterators are robust against changes to their collection. Adding or
- *	removing items from a collection will not invalidate the iteration.
- *  Subclasses of Collection can make further
- *	guarantees about the behavior of iterators in the presence of Collection
- *	modifications. For example a SequenceIterator will always traverse any
- *	items added after the current traversal index, and will never traverse
- *	items added with an index before the current traversal index.
- *
- *
- *		Note that we utilize a for-loop based approach to iteration. A
- *	somewhat popular alternative is modeled on Lisp usage: iterating over a
- *	passed in function. This style is sometimes refereed to as "passive"
- *	iteration. However, given C++ lack of support for lambda expressions
- *	(anonymous code blocks) the for-loop based approach seems superior,
- *	since it is always at least as convenient and at least as efficient,
- *	and often is slightly more convenient and slightly more convenient.
- *	DieHards can write ForEach style macros to support the passive style.
- *	For example:
- *		#define	Apply(T,Init,F)\
- 			for (IteratorRep<T> it (Init); not it.Done (); it.Next ())	{ (*F) (it.Current ()); }
- *	allows usages like Apply(int, fList, PrintInt);
- *
- *
- *
- * MORE RULES ABOUT ITERATORS (TO BE INTEGRATED INTO DOCS BETTER)
- *
- *		(1)		What is Done() cannot be UnDone()
- *				That is, once an iterator is done, it cannot be restarted.
- *		(2)		Iterators can be copied. They always refer to the same
- *				place they did before the copy, and the old iterator is unaffected
- *				by iteration in the new (though it can be affected indirectly
- *				thru mutations).
- *		(3)		Whether or not you encounter items added after an addition is
- *				undefined.
- *		(4)		A consequence of the above, is that items added after you are done,
- *				are not encountered. I'm not sure if this is currently true. We
- *				may want to rethink definitions, or somehow make this true.
- *
- *
- *	TODO:
- *
- *		->	Merge Current virtual call into More() call? Trouble is constructing
- *			T. We could make fields char fCurrent[sizeof(T)] but that poses problems
- *			for copying iterators. On balance, probably best to bag it!!!
- *
- *
+	Iterators allow ordered traversal of a container. In general, the only
+ 	guarantee about iteration order is that it will remain the same as long as
+ 	the container has not been modified. Difference subclasses of Container
+ 	more narrowly specify the details of traversal order: for example a Stack
+ 	will always iterate from the top-most to the bottom-most item.
+
+	Iterators are robust against changes to their container. Adding or
+	removing items from a container will not invalidate the iteration.
+	Subclasses of Container can make further guarantees about the behavior
+	of iterators in the presence of Container modifications.
+	For example a SequenceIterator will always traverse any
+	items added after the current traversal index, and will never traverse
+	items added with an index before the current traversal index.
+
+	Current returns the current iterator value. Current can be called at anytime not Done.
+	The value of Current is guaranteed to be valid if it was called when not Done, even if
+	that value was removed from the container at some point after Current was called.
+	The value of Current is undefined if called when Done.
+	operator* is equivalent to Current, you can use it.Current () or *it.
+
+	Iteration is advanced via operator++. If not Done, then the iterator advances to the
+	next item in the container, changing the value returned by Current. You can call operator++
+	even if Done: this has no effect. ** SSW NOTE: we need to check if this is the case
+	when an iterator was Done but then more items are added past it -- we don't want it to continue
+	iterating if Done was called. Maybe can enforce in the Iterator object via a sentinal value for current? **
+
+	Once an iteration has advanced it will never return to the previous place.
+	Iterations cannot be restarted.
+
+	Iterators can be copied. They always refer to the same place they did before the copy,
+	and the old iterator is unaffected by iteration in the new.
+
+	Ideally, iterators are equal if they have the produce the identical answers to
+	a sequence of Current, operator++ calls, until each is Done.
+	For practical reasons, Iterators may not reach this ideal, but
+	they will only produce false negatives (i.e. say thay are not equal when
+	if tested out, they would in fact turn out to be equal). Iterators that are copied are equal
+	if they have advanced via operator++ an equal number of times since creation of the copy.
+	Iterators that are Done are all equal.
+
+	Iterator are used primarily to get auto-destruction
+ 	at the end of a scope where they are used. They can be used directly,
+ 	or using ranged for syntax (currently imitated by For macro).
+
+ 	Example usage:
+		for (Iterator<size_t> it (myContainer); ! it.Done (); ++it)
+		for (Iterator<size_t> it = myContainer.begin (); it != myContainer.end (); ++it)
+		For (it, myContainer)
  */
+
 
 
 #include	"../StroikaPreComp.h"
@@ -69,26 +67,10 @@
 
 
 // SSW 9/19/2011: remove this restriction for more efficiency and flexibility
+// problem is handling ~T correctly
 #define qIteratorsRequireNoArgContructorForT    1
 
 
-/*
- *		Iterator are used primarily to get auto-destruction
- *	at the end of a scope where they are used. They can be used directly,
- *	or using ranged for syntax (currently imitated by For macro)
- *
- *  Current is a synonym for operator*. Done is a synonym for iterator != container.end ()
- *	Current can be called at anytime not Done. The value of
- *  Current is guaranteed to be valid if it was called before Done, even if that value
- *	was removed from the container at some point after Current was called.
- *
- *	The value of Current is undefined if called when Done.
- *
- *  Operator++ can be called anytime. If not done, then it iterates to the next
- *  item in the collection (i.e. it changes the value returned by Current).
- *
- *
- */
 
 namespace	Stroika {
 	namespace	Foundation {
@@ -114,13 +96,7 @@ namespace	Stroika {
                     nonvirtual  void    operator++ (int);
                     nonvirtual  bool    operator!= (Iterator rhs) const;
 
-                    /*
-                     * Ideally, iterators are equal if they have the produce the identical answers to
-                     * a sequence of Current, operator++ calls, until each is Done
-                     * For performance reasons, Iterators may not reach this ideal, but
-                     * they will only produce false negatives (i.e. say thay are not equal when
-					 * if tested out, they would in fact turn out to be equal
-                     */
+
                     nonvirtual  bool    operator== (Iterator rhs) const;
 
 					// Synonyms for above, sometimes making code more readable
