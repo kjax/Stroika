@@ -175,6 +175,9 @@
 		<Unit filename="../../Sources/Stroika/Foundation/Execution/DLLSupport.cpp" />
 		<Unit filename="../../Sources/Stroika/Foundation/Execution/DLLSupport.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Execution/DLLSupport.inl" />
+		<Unit filename="../../Sources/Stroika/Foundation/Execution/ErrNoException.cpp" />
+		<Unit filename="../../Sources/Stroika/Foundation/Execution/ErrNoException.h" />
+		<Unit filename="../../Sources/Stroika/Foundation/Execution/ErrNoException.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/Execution/Event.cpp" />
 		<Unit filename="../../Sources/Stroika/Foundation/Execution/Event.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Execution/Event.inl" />
@@ -313,6 +316,8 @@
 		<Unit filename="../../Sources/Stroika/Foundation/Streams/TextOutputStream.cpp" />
 		<Unit filename="../../Sources/Stroika/Foundation/Streams/TextOutputStream.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Streams/TextOutputStream.inl" />
+		<Unit filename="../../Sources/Stroika/Foundation/Streams/iostream/FStreamSupport.cpp" />
+		<Unit filename="../../Sources/Stroika/Foundation/Streams/iostream/FStreamSupport.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/StroikaPreComp.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Time/Date.cpp" />
 		<Unit filename="../../Sources/Stroika/Foundation/Time/Date.h" />
