@@ -55,6 +55,7 @@ namespace	Stroika {
 					{
 						return (SHARED_IMLP::get ());
 					}
+
 			template    <typename	T, typename SHARED_IMLP>
 				T* SharedByValue<T,SHARED_IMLP>::GetPointer ()
 					{
@@ -71,7 +72,7 @@ namespace	Stroika {
 						Assure1Reference ();
 						ptr = SHARED_IMLP::get ();
 						EnsureNotNull (ptr);
-						return (ptr); 
+						return (ptr);
 					}
 			template    <typename	T, typename SHARED_IMLP>
 				inline	const T*	SharedByValue<T,SHARED_IMLP>::operator-> () const
@@ -100,7 +101,7 @@ namespace	Stroika {
 						 */
 						Assure1Reference ();
 						EnsureNotNull (ptr);
-						return (*ptr); 
+						return (*ptr);
 					}
 			template    <typename	T, typename SHARED_IMLP>
 				inline	void	SharedByValue<T,SHARED_IMLP>::Assure1Reference ()

@@ -10,7 +10,7 @@
 
 
 
-namespace	Stroika {	
+namespace	Stroika {
 	namespace	Foundation {
 		namespace	Memory {
 
@@ -76,7 +76,7 @@ namespace	Stroika {
 					private:
 						nonvirtual	void	BreakReferences_ ();
 				};
-	
+
 		}
 	}
 }
