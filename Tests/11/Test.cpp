@@ -34,6 +34,7 @@ namespace	{
 template	<typename T>	void	TallyIteratorTests(Tally<T>& s)
 {
 	const	size_t	kTestSize	=	6;
+	const Tally<T>&	sConst = s;
 
 	VerifyTestResult (s.GetLength () == 0);
 
@@ -57,7 +58,7 @@ template	<typename T>	void	TallyIteratorTests(Tally<T>& s)
 		VerifyTestResult (s.GetLength () == kTestSize);
 
 		{
-			For (it, s) {
+			For (it,sConst) {
 				for (size_t i = 1; i <= kTestSize; i++) {
 					VerifyTestResult (s.Contains (T(i)));
 					VerifyTestResult (s.GetLength () == kTestSize - i + 1);
@@ -122,6 +123,8 @@ template	<typename T>	void	SimpleTallyTests (Tally<T>& s)
 {
 	T	three (3);
 
+	const Tally<T>&	sConst = s;
+
 	Tally<T>	s1 (s);
 
 	VerifyTestResult (s1 == s);
@@ -161,13 +164,14 @@ template	<typename T>	void	SimpleTallyTests (Tally<T>& s)
 	}
 
 	for (size_t i = 1; i <= s.GetLength (); i++) {
-		For (it, s) {
-			if (it.Current ().fItem == i) {
+		For (it, sConst) {
+			if (it.Current () == i) {
 				break;
 			}
 		}
 	}
-	For (it, typename Tally<T>::It (s)) {
+
+	For (it, typename Tally<T>::It (sConst)) {
 		For (it1, s) {
 			s.RemoveAll ();
 		}
