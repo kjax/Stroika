@@ -5,7 +5,7 @@
 #define	_Stroika_Foundation_Containers_Iterator_h_	1
 
 /*
- *
+ *		THIS DOC OBSOLETE BUT HAS SOME NICE WORDING, SEE BELOW FOR CURRENT DOC
  *		Iterators allow ordered traversal of a Collection. In general, the only
  *	guarantee about iteration order is that it will remain the same as long as
  *	the Collection has not been modified. Difference subclasses of Collection
@@ -13,10 +13,8 @@
  *	will always iterate from the top-most to the bottom-most item.
  *
  *		Iterators are robust against changes to their collection. Adding or
- *	removing items from a collection will not invalidate the iteration. The
- *	only exception is that removing the item currently being iterated over
- *	will invalidate the results of the Current () method (until the next call
- *	to the Next () method). Subclasses of Collection can make further
+ *	removing items from a collection will not invalidate the iteration.
+ *  Subclasses of Collection can make further
  *	guarantees about the behavior of iterators in the presence of Collection
  *	modifications. For example a SequenceIterator will always traverse any
  *	items added after the current traversal index, and will never traverse
@@ -73,6 +71,7 @@
 // SSW 9/19/2011: remove this restriction for more efficiency and flexibility
 #define qIteratorsRequireNoArgContructorForT    1
 
+
 /*
  *		Iterator are used primarily to get auto-destruction
  *	at the end of a scope where they are used. They can be used directly,
@@ -98,7 +97,6 @@ namespace	Stroika {
             template	<typename T> class	Iterator {
              	public:
 					class	Rep;
-					//class	RepSentinal;
 				public:
 					explicit	Iterator (Rep* it);
                     Iterator (const Iterator<T>& from);
@@ -115,6 +113,14 @@ namespace	Stroika {
                     nonvirtual  void    operator++ ();
                     nonvirtual  void    operator++ (int);
                     nonvirtual  bool    operator!= (Iterator rhs) const;
+
+                    /*
+                     * Ideally, iterators are equal if they have the produce the identical answers to
+                     * a sequence of Current, operator++ calls, until each is Done
+                     * For performance reasons, Iterators may not reach this ideal, but
+                     * they will only produce false negatives (i.e. say thay are not equal when
+					 * if tested out, they would in fact turn out to be equal
+                     */
                     nonvirtual  bool    operator== (Iterator rhs) const;
 
 					// Synonyms for above, sometimes making code more readable
@@ -123,9 +129,6 @@ namespace	Stroika {
                 public:
                     nonvirtual	T		Current () const;
                     nonvirtual	bool	Done () const;
-
-				public:
-					static	Iterator<T>			GetSentinal ();
 
                 protected:
                     Memory::SharedByValue<Rep>	fIterator;
@@ -163,6 +166,8 @@ namespace	Stroika {
                     virtual	bool	More (T* current, bool advance)   = 0;
                     virtual	Rep*	Clone () const		= 0;
                     nonvirtual bool Done () const;
+
+                    virtual	bool	IsEqual (const Rep* rhs) const;
             };
 
 

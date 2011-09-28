@@ -62,22 +62,21 @@ namespace	Stroika {
                 return not const_cast<Iterator<T>::Rep*> (this)->More (nullptr, false);
             }
 
+			template	<typename T>	bool   Iterator<T>::Rep::IsEqual (const Rep* rhs)  const
+			{
+				return (this == rhs);
+			}
+
             // class Iterator<T>
             template	<typename T> inline	Iterator<T>::Iterator (const Iterator<T>& from) :
                 fIterator (from.fIterator, &Clone_),
                 fCurrent (from.fCurrent)
             {
-				RequireNotNull (from.fIterator);
             }
 
             template	<typename T> inline	Iterator<T>::Iterator (Rep* it)   :
                 fIterator (it, &Clone_)
             {
-				if (it == nullptr) {
-					fIterator = GetSentinal ().fIterator;
-				}
-
-				EnsureNotNull (fIterator);
             }
 
             template	<typename T> inline	Iterator<T>::~Iterator ()
@@ -98,7 +97,8 @@ namespace	Stroika {
 
             template	<typename T> inline	bool	Iterator<T>::Done () const
             {
-            	return fIterator->Done ();
+				// nullptr is a sentinal value, used for begin/end style usage as the end value
+				return (fIterator.GetPointer () == nullptr) or fIterator->Done ();
             }
 
             template	<typename T>  inline    T   Iterator<T>::operator* () const
@@ -126,47 +126,20 @@ namespace	Stroika {
 
             template	<typename T> inline bool   Iterator<T>::operator== (Iterator rhs)  const
             {
+				bool	done = Done ();	// potentially expensive so get once
             	if (rhs.Done ()) {
-					return Done ();
+					return done;
             	}
-            	else if (not Done ()) {
+				else if (done) {
 					return false;
             	}
-
-            	// assigning to local variables to ensure const version called
-            	const	Iterator<T>::Rep* lhsRep = fIterator.GetPointer ();
-            	const	Iterator<T>::Rep* rhsRep = fIterator.GetPointer ();
-                return (lhsRep == rhsRep
-						and fCurrent == rhs.fCurrent);
+               return (fCurrent == rhs.fCurrent and (fIterator->IsEqual (fIterator.GetPointer ())));
 			}
 
 			template	<typename T> inline  typename Iterator<T>::Rep*   Iterator<T>::Clone_ (const typename Iterator<T>::Rep& rep)
 			{
 				return rep.Clone ();
 			}
-
-			template	<typename T> 	Iterator<T>	Iterator<T>::GetSentinal ()
-			{
-				class RepSentinal : public Iterator<T>::Rep  {
-					public:
-						RepSentinal () {}
-					public:
-						virtual	bool	More (T* current, bool advance) override
-						{
-							return false;
-						}
-						virtual	Rep*	Clone () const override
-						{
-							RequireNotReached ();
-							return nullptr;
-						}
-
-				};
-
-				static	Iterator<T> kSentinal = Iterator<T> (new RepSentinal ());
-				return Iterator<T> (kSentinal);
-			}
-
 
 		}
     }
