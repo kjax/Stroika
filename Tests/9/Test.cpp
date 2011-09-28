@@ -24,11 +24,17 @@ using	namespace	Stroika::Foundation::Containers;
 
 namespace	{
 
-static	void	BagIteratorTests(Bag<size_t>& s)
+#if		qDebug
+	const	size_t	K = 200;
+#else
+	const	size_t	K = 500;
+#endif
+
+template	<typename T>	void	BagIteratorTests(Bag<T>& s)
 {
 	const	size_t	kTestSize	= 100;
 
-	const	Bag<size_t>& sCont = s;
+	const	Bag<T>& sCont = s;
 
 	VerifyTestResult(s.GetLength() == 0);
 	/*
@@ -36,31 +42,31 @@ static	void	BagIteratorTests(Bag<size_t>& s)
 	 */
 	{
 		for(size_t i = 1; i <= kTestSize; i++) {
-			s.Add(i);
-           VerifyTestResult(s.Contains(i));
+			s.Add(T(i));
+           VerifyTestResult(s.Contains(T(i)));
 		}
 
 		VerifyTestResult(s.GetLength() == kTestSize);
 		For (it, sCont) {
         	size_t	oldLength = s.GetLength ();
             VerifyTestResult(s.Contains(it.Current ()));
-            VerifyTestResult(s.Contains(s.GetLength ()));
-            s.Remove (s.GetLength ());
+            VerifyTestResult(s.Contains(T (s.GetLength ())));
+            s.Remove (T (s.GetLength ()));
 			VerifyTestResult(s.GetLength () == oldLength-1);
         }
 
  		s.RemoveAll ();
         for(size_t i = 1; i <= kTestSize; i++) {
-			s.Add(i);
+			s.Add(T (i));
 		}
 
 		{
 			For (it, s) {
 				for(size_t i = 1; i <= kTestSize; i++) {
-					VerifyTestResult(s.Contains(i));
+					VerifyTestResult(s.Contains(T (i)));
 					VerifyTestResult(s.GetLength() == kTestSize - i + 1);
-					s.Remove(i);
-					VerifyTestResult(not s.Contains(i-1));
+					s.Remove(T (i));
+					VerifyTestResult(not s.Contains(T (i-1)));
 					VerifyTestResult(s.GetLength() == kTestSize - i);
 				}
 			}
@@ -69,7 +75,7 @@ static	void	BagIteratorTests(Bag<size_t>& s)
 		}
 
 		for(size_t i = 1; i <= kTestSize; i++) {
-			s.Add(i);
+			s.Add(T(i));
 		}
 		VerifyTestResult(s.GetLength() == kTestSize);
 		{
@@ -82,7 +88,7 @@ static	void	BagIteratorTests(Bag<size_t>& s)
 		}
 
 		for(size_t i = 1; i <= kTestSize; i++) {
-			s.Add(i);
+			s.Add(T (i));
 		}
 		VerifyTestResult(s.GetLength() == kTestSize);
 
@@ -98,7 +104,7 @@ static	void	BagIteratorTests(Bag<size_t>& s)
 		s.RemoveAll();
 		VerifyTestResult(s.GetLength() == 0);
 		for(size_t i = 1; i <= kTestSize; i++) {
-			s.Add(i);
+			s.Add(T (i));
 		}
 		VerifyTestResult(s.GetLength() == kTestSize);
 
@@ -106,10 +112,10 @@ static	void	BagIteratorTests(Bag<size_t>& s)
 		For(it, s) {
 			For(it2, s) {
 				For(it3, s) {
-					it3.UpdateCurrent(i);
+					it3.UpdateCurrent(T(i));
 					it3.RemoveCurrent();
-					s.Add(i);
-					s.Remove(i);
+					s.Add(T(i));
+					s.Remove(T(i));
 					i++;
 				}
 			}
@@ -118,20 +124,20 @@ static	void	BagIteratorTests(Bag<size_t>& s)
 
 
     s.RemoveAll ();
+	VerifyTestResult(s.GetLength() == 0);
 }
 
 
-static	void	BagTimings(Bag<size_t>& s)
-
+template	<typename T>	void	BagTimings(Bag<T>& s)
 {
-#if		qPrintTimings
-	Time t = GetCurrentTime();
-	cout << tab << "testing Bag<size_t> of length " << s.GetLength() << endl;
-#endif
+	s.RemoveAll ();
+	for(size_t i = 1; i <= K; i++) {
+		s.Add (T (i));
+	}
 
 	for(size_t i = 1; i <= s.GetLength(); i++) {
-		VerifyTestResult(s.Contains(i));
-		VerifyTestResult(not s.Contains(0));
+		VerifyTestResult(s.Contains(T(i)));
+		VerifyTestResult(not s.Contains(T(0)));
 	}
 
 	for(size_t i = 1; i <= s.GetLength(); i++) {
@@ -154,24 +160,19 @@ static	void	BagTimings(Bag<size_t>& s)
 			VerifyTestResult(false);
 		}
 	}
-
-	#if		qPrintTimings
-		t = GetCurrentTime() - t;
-		cout << tab << "finished testing Bag<size_t>; time elapsed = " << t << endl;
-	#endif
+	VerifyTestResult(s.GetLength() == 0);
 }
 
-
-void	BagTests(Bag<size_t>& s)
+template	<typename T>	void	BagTests (Bag<T>& s)
 {
-	size_t	three = 3;
+	T	three = T (3);
 
-	Bag<size_t>	s1(s);
+	Bag<T>	s1(s);
 
 	VerifyTestResult(s1 == s);
 	VerifyTestResult(s1 == s);
 
-	Bag<size_t>	s2 = s1;
+	Bag<T>	s2 = s1;
 
 	VerifyTestResult(s2 == s);
 	VerifyTestResult(s2 == s1);
@@ -180,13 +181,6 @@ void	BagTests(Bag<size_t>& s)
 	VerifyTestResult(s1 == s);
 	VerifyTestResult(s2 != s1);
 
-	BagIteratorTests(s);
-
-#if		qDebug
-	const	size_t	K = 200;
-#else
-	const	size_t	K = 500;
-#endif
 	size_t i;
 
 	VerifyTestResult(s.IsEmpty());
@@ -202,56 +196,41 @@ void	BagTests(Bag<size_t>& s)
 	s.RemoveAll();
 	VerifyTestResult(s.IsEmpty());
 
-	for(i = 1; i <= K; i++) {
-		s.Add(i);
-	}
-	BagTimings(s);
-	VerifyTestResult(s.IsEmpty());
-
-#if		qPrintTimings
-	Time t = GetCurrentTime();
-	cout << tab << "testing Bag<size_t>..." << endl;
-#endif
 
 	for(i = 1; i <= K; i++) {
-		s.Add(i);
-		VerifyTestResult(s.Contains(i));
-		VerifyTestResult(s.TallyOf(i) == 1);
+		s.Add (T (i));
+		VerifyTestResult(s.Contains(T (i)));
+		VerifyTestResult(s.TallyOf(T (i)) == 1);
 		VerifyTestResult(s.GetLength() == i);
 	}
 	for(i = K; i > 0; i--) {
-		s -= i;
-		VerifyTestResult(not s.Contains(i));
+		s -= T (i);
+		VerifyTestResult(not s.Contains(T (i)));
 		VerifyTestResult(s.GetLength() ==(i-1));
 	}
 	VerifyTestResult(s.IsEmpty());
 
 	for(i = 1; i <= K/2; i++) {
-		s += 1;
-		VerifyTestResult(s.TallyOf(1) == i);
+		s += T(1);
+		VerifyTestResult(s.TallyOf(T(1)) == i);
 	}
 	size_t oldLength = s.GetLength();
 	s += s;
 	VerifyTestResult(s.GetLength() == oldLength*2);
 	s -= s;
 	VerifyTestResult(s.GetLength() == 0);
-
-#if		qPrintTimings
-	t = GetCurrentTime() - t;
-	cout << tab << "finished testing Bag<size_t>; time elapsed = " << t << endl;
-#endif
 }
 
-void	BagTests(Bag<SimpleClass>& s)
+template	<typename T>	void	BasicTests (Bag<T>& s)
 {
-	SimpleClass	three = 3;
+	T	three (3);
 
-	Bag<SimpleClass>	s1(s);
+	Bag<T>	s1(s);
 
 	VerifyTestResult(s1 == s);
 	VerifyTestResult(s1 == s);
 
-	Bag<SimpleClass>	s2 = s1;
+	Bag<T>	s2 = s1;
 
 	VerifyTestResult(s2 == s);
 	VerifyTestResult(s2 == s1);
@@ -276,32 +255,28 @@ void	BagTests(Bag<SimpleClass>& s)
 
 namespace	{
 
+	template	<typename ConType, typename T>	void	RunTests ()
+	{
+		ConType	s;
+		BasicTests<T> (s);
+		BagTests<T> (s);
+		BagIteratorTests<T> (s);
+		BagTimings<T> (s);
+	}
+
 	void	DoRegressionTests_ ()
 		{
-           {
-            Bag_LinkedList<size_t>	s;
-		    BagTests (s);
-            }
+		    RunTests<Bag_LinkedList<size_t>, size_t> ();
+		    RunTests<Bag_LinkedList<SimpleClass>, SimpleClass> ();
 
-			{
-            Bag_LinkedList<SimpleClass>	s;
-		    BagTests (s);
-            }
-			{
-            Bag_Array<size_t>	s;
-		    BagTests (s);
-            }
+		    RunTests<Bag_Array<size_t>, size_t> ();
+		    RunTests<Bag_Array<SimpleClass>, SimpleClass> ();
 
-            {
- 		    Bag_Array<SimpleClass>	s;
-            BagTests (s);
-            }
-
-            {
-            	// just proof that they can be constructed
-				Bag<size_t>	s;
-				Bag<SimpleClass>	s1;
-            }
+			// just proof that they can be constructed
+			Bag<size_t>	s;
+			BasicTests<size_t> (s);
+			Bag<SimpleClass>	s1;
+			BasicTests<SimpleClass> (s1);
 	}
 }
 

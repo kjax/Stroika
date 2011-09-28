@@ -17,12 +17,14 @@ namespace	Stroika {
         #if qIteratorsRequireNoArgContructorForT
                 SimpleClass ();
         #endif
-            SimpleClass (size_t v);
+            explicit	SimpleClass (size_t v);
             SimpleClass (const SimpleClass& f);
             ~SimpleClass ();
 
             nonvirtual	size_t	GetValue () const;
             static		size_t	GetTotalLiveCount ();
+
+            operator size_t () const;
 
         private:
             size_t	fValue;
@@ -36,4 +38,10 @@ namespace	Stroika {
     bool	operator< (const SimpleClass& lhs, const SimpleClass& rhs);
 };
 
+namespace	Stroika {
+	inline	SimpleClass::operator size_t () const
+	{
+		return GetValue ();
+	}
+}
 #endif  /* _Stroika_Foundation_Tests_SimpleClass_h_ */
