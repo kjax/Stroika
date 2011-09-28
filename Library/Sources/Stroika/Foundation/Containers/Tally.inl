@@ -174,7 +174,7 @@ namespace	Stroika {
 
             template	<typename T>	inline	Iterator<T>    Tally<T>::end () const
             {
-                return (nullptr);
+                return (Iterator<T> (nullptr));
             }
 
             template	<typename T>	inline	TallyMutator<T>    Tally<T>::begin ()
