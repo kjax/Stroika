@@ -66,7 +66,6 @@
 		<Unit filename="../../Sources/Stroika/Foundation/Characters/StringUtils.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Characters/StringUtils.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/Characters/TChar.h" />
-		<Unit filename="../../Sources/Stroika/Foundation/Characters/TChar.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/Characters/TString.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Characters/TString.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/Characters/Tokenize.cpp" />
@@ -100,6 +99,8 @@
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Bag_LinkedList.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Collection.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Collection.inl" />
+		<Unit filename="../../Sources/Stroika/Foundation/Containers/CollectionElementTraits.h" />
+		<Unit filename="../../Sources/Stroika/Foundation/Containers/CollectionElementTraits.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Common.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Common.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/Containers/Iterator.h" />
@@ -173,6 +174,9 @@
 		<Unit filename="../../Sources/Stroika/Foundation/Execution/DLLSupport.cpp" />
 		<Unit filename="../../Sources/Stroika/Foundation/Execution/DLLSupport.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Execution/DLLSupport.inl" />
+		<Unit filename="../../Sources/Stroika/Foundation/Execution/ErrNoException.cpp" />
+		<Unit filename="../../Sources/Stroika/Foundation/Execution/ErrNoException.h" />
+		<Unit filename="../../Sources/Stroika/Foundation/Execution/ErrNoException.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/Execution/Event.cpp" />
 		<Unit filename="../../Sources/Stroika/Foundation/Execution/Event.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Execution/Event.inl" />
@@ -243,6 +247,9 @@
 		<Unit filename="../../Sources/Stroika/Foundation/IO/FileBusyException.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/IO/FileFormatException.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/IO/FileFormatException.inl" />
+		<Unit filename="../../Sources/Stroika/Foundation/IO/FileSystem/Directory.cpp" />
+		<Unit filename="../../Sources/Stroika/Foundation/IO/FileSystem/Directory.h" />
+		<Unit filename="../../Sources/Stroika/Foundation/IO/FileSystem/Directory.inl" />
 		<Unit filename="../../Sources/Stroika/Foundation/IO/FileSystem/FileUtils.cpp" />
 		<Unit filename="../../Sources/Stroika/Foundation/IO/FileSystem/FileUtils.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/IO/FileSystem/FileUtils.inl" />
@@ -308,6 +315,8 @@
 		<Unit filename="../../Sources/Stroika/Foundation/Streams/TextOutputStream.cpp" />
 		<Unit filename="../../Sources/Stroika/Foundation/Streams/TextOutputStream.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Streams/TextOutputStream.inl" />
+		<Unit filename="../../Sources/Stroika/Foundation/Streams/iostream/FStreamSupport.cpp" />
+		<Unit filename="../../Sources/Stroika/Foundation/Streams/iostream/FStreamSupport.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/StroikaPreComp.h" />
 		<Unit filename="../../Sources/Stroika/Foundation/Time/Date.cpp" />
 		<Unit filename="../../Sources/Stroika/Foundation/Time/Date.h" />
