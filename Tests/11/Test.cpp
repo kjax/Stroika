@@ -30,6 +30,16 @@ using	namespace	Stroika::Foundation::Containers;
 
 namespace	{
 
+template	<typename T>	void	AddInOrder(Tally<T>& s, size_t first, size_t last)
+{
+	Require (first <= last);
+	size_t	oldLength = s.GetLength ();
+	for (size_t i = first; i <= last; ++i) {
+		s.Add (T (i));
+	}
+	VerifyTestResult ((s.GetLength () - oldLength) == (last - first + 1));
+}
+
 
 template	<typename T>	void	TallyIteratorTests(Tally<T>& s)
 {
@@ -45,74 +55,58 @@ template	<typename T>	void	TallyIteratorTests(Tally<T>& s)
 	/*
 	 * Try removes while iterating forward.
 	 */
-	{
-		for (size_t i = 1; i <= kTestSize; i++) {
-			s.Add (T (i));
-		}
+	AddInOrder (s, 1, kTestSize);
 
-
-		For (it, s) {
-			it.UpdateCount (1);
-		}
-
-		VerifyTestResult (s.GetLength () == kTestSize);
-
-		{
-			For (it,sConst) {
-				for (size_t i = 1; i <= kTestSize; i++) {
-					VerifyTestResult (s.Contains (T(i)));
-					VerifyTestResult (s.GetLength () == kTestSize - i + 1);
-					s.Remove (T(i));
-					VerifyTestResult (not s.Contains (T(i-1)));
-				}
-			}
-			VerifyTestResult (s.IsEmpty ());
-			VerifyTestResult (s.GetLength () == 0);
-		}
-
-		for (size_t i = 1; i <= kTestSize; i++) {
-			s.Add (T(i));
-		}
-		VerifyTestResult (s.GetLength () == kTestSize);
-		{
-			For (it, s) {
-				it.RemoveCurrent ();
-			}
-			VerifyTestResult (s.IsEmpty ());
-			VerifyTestResult (s.GetLength () == 0);
-		}
-
-		for (size_t i = 1; i <= kTestSize; i++) {
-			s.Add (T(i));
-		}
-		VerifyTestResult (s.GetLength () == kTestSize);
-		For (it2, s) {
-			s.Remove (it2.Current ().fItem);
-		}
-		VerifyTestResult (s.GetLength () == 0);
+	For (it, s) {
+		it.UpdateCount (1);
 	}
+	VerifyTestResult (s.GetLength () == kTestSize);
+
+	For (it,sConst) {
+		for (size_t i = 1; i <= kTestSize; i++) {
+			VerifyTestResult (s.Contains (T(i)));
+			VerifyTestResult (s.GetLength () == kTestSize - i + 1);
+			s.Remove (T(i));
+			VerifyTestResult (not s.Contains (T(i-1)));
+		}
+	}
+	VerifyTestResult (s.IsEmpty ());
+	VerifyTestResult (s.GetLength () == 0);
+
+	AddInOrder (s, 1, kTestSize);
+
+	VerifyTestResult (s.GetLength () == kTestSize);
+	For (it, s) {
+		it.RemoveCurrent ();
+	}
+	VerifyTestResult (s.IsEmpty ());
+	VerifyTestResult (s.GetLength () == 0);
+
+	AddInOrder (s, 1, kTestSize);
+
+	VerifyTestResult (s.GetLength () == kTestSize);
+	For (it2, s) {
+		s.Remove (it2.Current ().fItem);
+	}
+	VerifyTestResult (s.GetLength () == 0);
 
 	/*
 	 * Try removes multiple iterators present.
 	 */
-	{
-		s.RemoveAll ();
-		VerifyTestResult (s.GetLength () == 0);
-		for (size_t i = 1; i <= kTestSize; i++) {
-			s.Add (T(i));
-		}
-		VerifyTestResult (s.GetLength () == kTestSize);
-		size_t i =	1;
+	s.RemoveAll ();
+	VerifyTestResult (s.GetLength () == 0);
+	AddInOrder (s, 1, kTestSize);
+	VerifyTestResult (s.GetLength () == kTestSize);
+	size_t i =	1;
 
-		For (it, s) {
-			For (it2, s) {
-				For (it3, s) {
-					if (s.GetLength () != 0) {
-						it3.UpdateCount (3);
-						it3.RemoveCurrent ();
-						s.Add (T(i));
-						s.Remove (T(i));
-					}
+	For (it, s) {
+		For (it2, s) {
+			For (it3, s) {
+				if (s.GetLength () != 0) {
+					it3.UpdateCount (3);
+					it3.RemoveCurrent ();
+					s.Add (T(i));
+					s.Remove (T(i));
 				}
 			}
 		}
@@ -224,20 +218,21 @@ namespace	{
 		ConType	s;
 		SimpleTallyTests<T> (s);
 		TallyIteratorTests<T> (s);
-
 	}
 
 	void	DoRegressionTests_ ()
-		{
-            RunTests<Tally_LinkedList<size_t>, size_t> ();
-            RunTests<Tally_LinkedList<SimpleClass>,SimpleClass> ();
+	{
+		RunTests<Tally_LinkedList<size_t>, size_t> ();
+		RunTests<Tally_LinkedList<SimpleClass>,SimpleClass> ();
 
-            RunTests<Tally_Array<size_t>,size_t> ();
-            RunTests<Tally_Array<SimpleClass>,SimpleClass> ();
+		RunTests<Tally_Array<size_t>,size_t> ();
+		RunTests<Tally_Array<SimpleClass>,SimpleClass> ();
 
-			// just proof that they can be constructed
-			Tally<size_t> t;
-			Tally<SimpleClass>	s1;
+		// just proof that they can be constructed
+		Tally<size_t> t;
+		Tally<SimpleClass>	s1;
+
+		VerifyTestResult(SimpleClass::GetTotalLiveCount() == 0);
 	}
 }
 

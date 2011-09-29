@@ -30,6 +30,17 @@ namespace	{
 	const	size_t	K = 500;
 #endif
 
+template	<typename T>	void	AddInOrder(Bag<T>& s, size_t first, size_t last)
+{
+	Require (first <= last);
+	size_t	oldLength = s.GetLength ();
+	for (size_t i = first; i <= last; ++i) {
+		s.Add (T (i));
+	}
+	VerifyTestResult ((s.GetLength () - oldLength) == (last - first + 1));
+}
+
+
 template	<typename T>	void	BagIteratorTests(Bag<T>& s)
 {
 	const	size_t	kTestSize	= 100;
@@ -40,88 +51,72 @@ template	<typename T>	void	BagIteratorTests(Bag<T>& s)
 	/*
 	 * Try removes while iterating forward.
 	 */
-	{
-		for(size_t i = 1; i <= kTestSize; i++) {
-			s.Add(T(i));
-           VerifyTestResult(s.Contains(T(i)));
-		}
-
-		VerifyTestResult(s.GetLength() == kTestSize);
-		For (it, sCont) {
-        	size_t	oldLength = s.GetLength ();
-            VerifyTestResult(s.Contains(it.Current ()));
-            VerifyTestResult(s.Contains(T (s.GetLength ())));
-            s.Remove (T (s.GetLength ()));
-			VerifyTestResult(s.GetLength () == oldLength-1);
-        }
-
- 		s.RemoveAll ();
-        for(size_t i = 1; i <= kTestSize; i++) {
-			s.Add(T (i));
-		}
-
-		{
-			For (it, s) {
-				for(size_t i = 1; i <= kTestSize; i++) {
-					VerifyTestResult(s.Contains(T (i)));
-					VerifyTestResult(s.GetLength() == kTestSize - i + 1);
-					s.Remove(T (i));
-					VerifyTestResult(not s.Contains(T (i-1)));
-					VerifyTestResult(s.GetLength() == kTestSize - i);
-				}
-			}
-			VerifyTestResult(s.IsEmpty());
-			VerifyTestResult(s.GetLength() == 0);
-		}
-
-		for(size_t i = 1; i <= kTestSize; i++) {
-			s.Add(T(i));
-		}
-		VerifyTestResult(s.GetLength() == kTestSize);
-		{
-			For (it, s) {
-				it.RemoveCurrent();
-			}
-
-			VerifyTestResult(s.IsEmpty());
-			VerifyTestResult(s.GetLength() == 0);
-		}
-
-		for(size_t i = 1; i <= kTestSize; i++) {
-			s.Add(T (i));
-		}
-		VerifyTestResult(s.GetLength() == kTestSize);
-
-		For(it2, s) {
-			s.Remove(it2.Current());
-		}
-		VerifyTestResult(s.GetLength() == 0);
+	for(size_t i = 1; i <= kTestSize; i++) {
+		s.Add(T(i));
+	   VerifyTestResult(s.Contains(T(i)));
 	}
+
+	VerifyTestResult(s.GetLength() == kTestSize);
+	For (it, sCont) {
+		size_t	oldLength = s.GetLength ();
+		VerifyTestResult(s.Contains(it.Current ()));
+		VerifyTestResult(s.Contains(T (s.GetLength ())));
+		s.Remove (T (s.GetLength ()));
+		VerifyTestResult(s.GetLength () == oldLength-1);
+	}
+
+	s.RemoveAll ();
+	AddInOrder (s, 1, kTestSize);
+
+	For (it, s) {
+		for(size_t i = 1; i <= kTestSize; i++) {
+			VerifyTestResult(s.Contains(T (i)));
+			VerifyTestResult(s.GetLength() == kTestSize - i + 1);
+			s.Remove(T (i));
+			VerifyTestResult(not s.Contains(T (i-1)));
+			VerifyTestResult(s.GetLength() == kTestSize - i);
+		}
+	}
+	VerifyTestResult(s.IsEmpty());
+	VerifyTestResult(s.GetLength() == 0);
+
+	AddInOrder (s, 1, kTestSize);
+	VerifyTestResult(s.GetLength() == kTestSize);
+	For (it, s) {
+		it.RemoveCurrent();
+	}
+
+	VerifyTestResult(s.IsEmpty());
+	VerifyTestResult(s.GetLength() == 0);
+
+	AddInOrder (s, 1, kTestSize);
+	VerifyTestResult(s.GetLength() == kTestSize);
+
+	For(it2, s) {
+		s.Remove(it2.Current());
+	}
+	VerifyTestResult(s.GetLength() == 0);
+
 	/*
 	 * Try removes multiple iterators present.
 	 */
-	{
-		s.RemoveAll();
-		VerifyTestResult(s.GetLength() == 0);
-		for(size_t i = 1; i <= kTestSize; i++) {
-			s.Add(T (i));
-		}
-		VerifyTestResult(s.GetLength() == kTestSize);
+	s.RemoveAll();
+	VerifyTestResult(s.GetLength() == 0);
+	AddInOrder (s, 1, kTestSize);
+	VerifyTestResult(s.GetLength() == kTestSize);
 
-		size_t i =	1;
-		For(it, s) {
-			For(it2, s) {
-				For(it3, s) {
-					it3.UpdateCurrent(T(i));
-					it3.RemoveCurrent();
-					s.Add(T(i));
-					s.Remove(T(i));
-					i++;
-				}
+	size_t i =	1;
+	For(it, s) {
+		For(it2, s) {
+			For(it3, s) {
+				it3.UpdateCurrent(T(i));
+				it3.RemoveCurrent();
+				s.Add(T(i));
+				s.Remove(T(i));
+				i++;
 			}
 		}
 	}
-
 
     s.RemoveAll ();
 	VerifyTestResult(s.GetLength() == 0);
@@ -131,9 +126,7 @@ template	<typename T>	void	BagIteratorTests(Bag<T>& s)
 template	<typename T>	void	BagTimings(Bag<T>& s)
 {
 	s.RemoveAll ();
-	for(size_t i = 1; i <= K; i++) {
-		s.Add (T (i));
-	}
+	AddInOrder (s, 1, K);
 
 	for(size_t i = 1; i <= s.GetLength(); i++) {
 		VerifyTestResult(s.Contains(T(i)));
@@ -147,6 +140,7 @@ template	<typename T>	void	BagTimings(Bag<T>& s)
 			}
 		}
 	}
+
 	For(it, s) {
 		For(it1, s) {
 			s.RemoveAll();
@@ -265,18 +259,20 @@ namespace	{
 	}
 
 	void	DoRegressionTests_ ()
-		{
-		    RunTests<Bag_LinkedList<size_t>, size_t> ();
-		    RunTests<Bag_LinkedList<SimpleClass>, SimpleClass> ();
+	{
+		RunTests<Bag_LinkedList<size_t>, size_t> ();
+		RunTests<Bag_LinkedList<SimpleClass>, SimpleClass> ();
 
-		    RunTests<Bag_Array<size_t>, size_t> ();
-		    RunTests<Bag_Array<SimpleClass>, SimpleClass> ();
+		RunTests<Bag_Array<size_t>, size_t> ();
+		RunTests<Bag_Array<SimpleClass>, SimpleClass> ();
 
-			// just proof that they can be constructed
-			Bag<size_t>	s;
-			BasicTests<size_t> (s);
-			Bag<SimpleClass>	s1;
-			BasicTests<SimpleClass> (s1);
+		// just proof that they can be constructed
+		Bag<size_t>	s;
+		BasicTests<size_t> (s);
+		Bag<SimpleClass>	s1;
+		BasicTests<SimpleClass> (s1);
+
+		VerifyTestResult(SimpleClass::GetTotalLiveCount() == 0);
 	}
 }
 
