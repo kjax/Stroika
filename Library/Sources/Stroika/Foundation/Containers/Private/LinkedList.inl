@@ -416,7 +416,7 @@ namespace	Stroika {
 					Require (this->fLength >= 1);
 
 					Invariant ();
-					T current;
+					T current (item);
 					for (LinkedListMutator_Patch<T> it (*this); it.More (&current, true); ) {
 						if (current == item) {
 							it.RemoveCurrent ();

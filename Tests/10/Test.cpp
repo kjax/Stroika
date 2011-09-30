@@ -51,7 +51,15 @@ template	<typename T>	void	Test ()
 	someLL.SetAt (T(55), 55);
 	VerifyTestResult (someLL.GetAt (55) == T (55));
 	VerifyTestResult (not(someLL.GetAt(55) == T (56)));
-	{ size_t i = 1; T cur; for (LinkedListMutator_Patch<T> it (someLL); it.More(&cur, true); i++) { if (i==100) {it.AddAfter (T (1)); break;} } }
+	{
+		size_t i = 1;
+		for (LinkedListMutator_Patch<T> it (someLL); it.More(nullptr, true); i++) {
+			if (i==100) {
+				it.AddAfter (T (1));
+				break;
+			}
+		}
+	}
 
 	VerifyTestResult (someLL.GetLength() == kBigSize+1);
 	VerifyTestResult (someLL.GetAt (100) == T (1));

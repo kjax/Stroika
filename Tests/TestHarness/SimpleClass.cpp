@@ -27,14 +27,6 @@ static	const	int kFunnyValue = 1234;
 
 size_t	SimpleClass::sTotalLiveObjects	=	0;
 
-#if qIteratorsRequireNoArgContructorForT
-     SimpleClass::SimpleClass () :
-        fValue (3),
-        fConstructed (kFunnyValue)
-    {
-        sTotalLiveObjects++;
-    }
-#endif
 
 SimpleClass::SimpleClass (size_t v) :
 	fValue (v),

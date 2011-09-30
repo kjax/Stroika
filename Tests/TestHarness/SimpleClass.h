@@ -14,9 +14,6 @@
 namespace	Stroika {
     class	SimpleClass {
         public:
-        #if qIteratorsRequireNoArgContructorForT
-                SimpleClass ();
-        #endif
             explicit	SimpleClass (size_t v);
             SimpleClass (const SimpleClass& f);
             ~SimpleClass ();

@@ -182,7 +182,7 @@ namespace	Stroika {
 
 			template	<typename T> bool	Tally_LinkedListRep<T>::Contains (T item) const
 			{
-				TallyEntry<T>	c;
+				TallyEntry<T>	c (item);
 				for (LinkedListIterator<TallyEntry<T> > it (fData); it.More (&c, true); ) {
 					if (c.fItem == item) {
 						Assert (c.fCount != 0);
@@ -248,7 +248,7 @@ namespace	Stroika {
 
 			template	<typename T> size_t	Tally_LinkedListRep<T>::TallyOf (T item) const
 			{
-				TallyEntry<T>	c;
+				TallyEntry<T>	c (item);
 				for (LinkedListIterator<TallyEntry<T> > it (fData); it.More (&c, true); ) {
 					if (c.fItem == item) {
 						Ensure (c.fCount != 0);

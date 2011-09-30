@@ -66,17 +66,11 @@
 #include	"../Memory/SharedByValue.h"
 
 
-// SSW 9/19/2011: remove this restriction for more efficiency and flexibility
-// problem is handling ~T correctly
-#define qIteratorsRequireNoArgContructorForT    1
-
-
-
 namespace	Stroika {
 	namespace	Foundation {
 		namespace	Containers {
 
-		// start cutting
+		// start of NoConstructorWrapper, cut here
 		template	<typename T> class	NoConstructorWrapper {
 			public:
 				NoConstructorWrapper () :
@@ -133,15 +127,18 @@ namespace	Stroika {
 				T*	AsPointer ()
 				{
 					/*
-						This is the problem. If I pass in this, how can I assure that
-						it gets handled properly? I don't really want to force all the underlying
-						routines to just take raw memory, or do I?
+						This is a potential problem. I think we want to insist that
+						it be treated as raw memory, so we make require that we
+						aren't constructed at this point (can use Clear to do that,
+						but probably (nearly) always better to construct a temporary
+						variable and call AsPointer from it, then copy back to what you want.
 					*/
 					Require (not fConstructed);
 					T*	item = reinterpret_cast<T*> (&fItem);
 					return item;
 				}
 
+				// currently only called in debug mode, perhaps should jettison entirely
 				nonvirtual	void	Clear ()
 				{
 					DestroyCurrent ();
@@ -170,7 +167,7 @@ namespace	Stroika {
 		{
 			return not operator== (lhs,rhs);
 		}
-		// end cutting
+		// end cutting for NoConstructorWrapper
 
 
             template	<typename T> class	Iterator {

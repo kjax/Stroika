@@ -346,9 +346,14 @@ namespace	Stroika {
 					return fIt->More (nullptr, false);
 				}
 				else {
-					TallyEntry<T> xx;
-					bool	result = fIt->More (&xx, advance);
-					*current = xx.fItem;
+					NoConstructorWrapper<TallyEntry<T>> tmp;
+					TallyEntry<T>*	pT = tmp.AsPointer ();
+ 					bool	result = fIt->More (pT, advance);
+					if (result) {
+						tmp = NoConstructorWrapper<TallyEntry<T>>(*pT);
+						*current = tmp.operator* ().fItem;
+					}
+
 					return (result);
 				}
 			}
