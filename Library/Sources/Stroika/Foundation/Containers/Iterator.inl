@@ -117,8 +117,8 @@ namespace	Stroika {
 
             template	<typename T> inline	Iterator<T>&	Iterator<T>::operator= (const Iterator<T>& rhs)
             {
-            	fIterator = rhs.fIterator;
-            	fCurrent = rhs.fCurrent;
+				fIterator = rhs.fIterator;
+				fCurrent = rhs.fCurrent;
                 return (*this);
             }
 
@@ -153,18 +153,18 @@ namespace	Stroika {
 
             template	<typename T> inline bool   Iterator<T>::operator!= (Iterator rhs)  const
             {
-            	return not operator== (rhs);
+           		return not operator== (rhs);
             }
 
             template	<typename T> inline bool   Iterator<T>::operator== (Iterator rhs)  const
             {
 				bool	done = Done ();	// potentially expensive so get once
-            	if (rhs.Done ()) {
+           		if (rhs.Done ()) {
 					return done;
-            	}
+           		}
 				else if (done) {
 					return false;
-            	}
+           		}
                return (fCurrent == rhs.fCurrent and (fIterator->IsEqual (fIterator.GetPointer ())));
 			}
 

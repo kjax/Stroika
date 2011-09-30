@@ -164,7 +164,9 @@ namespace	Stroika {
 
 			template	<typename T>	inline	Tally<T>::operator TallyMutator<T> ()
 			{
-				return (fRep->MakeTallyMutator ());
+				TallyMutator<T> it (fRep->MakeTallyMutator ());
+                ++it;
+                return it;
 			}
 
             template	<typename T>	inline	Iterator<T>    Tally<T>::begin () const

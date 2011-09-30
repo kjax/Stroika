@@ -160,7 +160,7 @@ namespace	Stroika {
                     static	BagRep<T>*	Clone (const BagRep<T>& rep);
 
                     // SSW 9/16/2011: note weird syntax needed for friend declaration (and had to be forwarded above)
-                	friend  bool	operator==<T> (const Bag<T>& lhs, const Bag<T>& rhs);	// friend to check if reps equal...
+               		friend  bool	operator==<T> (const Bag<T>& lhs, const Bag<T>& rhs);	// friend to check if reps equal...
             };
 
 
@@ -179,8 +179,8 @@ namespace	Stroika {
                     BagMutatorRep ();
 
                 public:
-                    virtual	void	RemoveCurrent () 			=	0;
-                    virtual	void	UpdateCurrent (T newValue) 	=	0;
+                    virtual	void	RemoveCurrent ()				=	0;
+                    virtual	void	UpdateCurrent (T newValue)		=	0;
             };
 
             template	<typename T>	class	BagRep {
@@ -193,16 +193,16 @@ namespace	Stroika {
                 public:
                     virtual	BagRep<T>*	Clone () const					=	0;
                     virtual	bool		Contains (T item) const			=	0;
-                    virtual	size_t		GetLength () const 				=	0;
+                    virtual	size_t		GetLength () const				=	0;
                     virtual	void		Compact ()						=	0;
-                    virtual	void		RemoveAll () 					=	0;
+                    virtual	void		RemoveAll ()					=	0;
 
                     virtual	void		Add (T item)					=	0;
                     virtual	void		Remove (T item)					=	0;
 
-                    virtual	typename Iterator<T>::Rep*		MakeIterator () 		=	0;
-                    virtual	BagIteratorRep<T>*	MakeBagIterator () 		=	0;
-                    virtual	BagMutatorRep<T>*	MakeBagMutator () 		=	0;
+                    virtual	typename Iterator<T>::Rep*		MakeIterator ()	=	0;
+                    virtual	BagIteratorRep<T>*	MakeBagIterator ()			=	0;
+                    virtual	BagMutatorRep<T>*	MakeBagMutator ()			=	0;
             };
 
 		}

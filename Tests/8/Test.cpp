@@ -31,24 +31,24 @@ using	namespace	Stroika::Foundation::Containers;
 namespace	{
 template	<typename T>	void	Test1 ()
 {
- 	    Array<T>	a;
- 	    a.InsertAt(T (100), 0);
-// for (size_t i = 0; i < someArray.GetLength (); ++i) { cerr << "someArray[" << i << "] = " << someArray[i].GetValue () << endl; }
-		VerifyTestResult (a.GetLength() == 1);
-		VerifyTestResult (a[0] == T (100));
-	    a.RemoveAt(0);
- 	    a.InsertAt(T (2), 0);
- 	    a.InsertAt(T (1), 0);
-  	    a.InsertAt(T (3), 0);
-  	    a.InsertAt(T (4), a.GetLength ());
-		VerifyTestResult (a.GetLength() == 4);
-		VerifyTestResult (a[0] == T (3));
-		VerifyTestResult (a[1] == T (1));
-		VerifyTestResult (a[2] == T (2));
-		VerifyTestResult (a[3] == T (4));
-        a.RemoveAt(a.GetLength ()-1);
-        a.RemoveAt(1);
-		VerifyTestResult (a.GetLength() == 2);
+	Array<T>	a;
+	a.InsertAt(T (100), 0);
+	// for (size_t i = 0; i < someArray.GetLength (); ++i) { cerr << "someArray[" << i << "] = " << someArray[i].GetValue () << endl; }
+	VerifyTestResult (a.GetLength() == 1);
+	VerifyTestResult (a[0] == T (100));
+	a.RemoveAt(0);
+	a.InsertAt(T (2), 0);
+	a.InsertAt(T (1), 0);
+	a.InsertAt(T (3), 0);
+	a.InsertAt(T (4), a.GetLength ());
+	VerifyTestResult (a.GetLength() == 4);
+	VerifyTestResult (a[0] == T (3));
+	VerifyTestResult (a[1] == T (1));
+	VerifyTestResult (a[2] == T (2));
+	VerifyTestResult (a[3] == T (4));
+	a.RemoveAt(a.GetLength ()-1);
+	a.RemoveAt(1);
+	VerifyTestResult (a.GetLength() == 2);
 }
 
 template	<typename T>	void	Test2 ()
