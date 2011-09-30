@@ -346,7 +346,7 @@ namespace	Stroika {
 					return fIt->More (nullptr, false);
 				}
 				else {
-					TallyEntry<T> xx (*current);
+					TallyEntry<T> xx;
 					bool	result = fIt->More (&xx, advance);
 					*current = xx.fItem;
 					return (result);

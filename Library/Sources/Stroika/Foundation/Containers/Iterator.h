@@ -76,6 +76,103 @@ namespace	Stroika {
 	namespace	Foundation {
 		namespace	Containers {
 
+		// start cutting
+		template	<typename T> class	NoConstructorWrapper {
+			public:
+				NoConstructorWrapper () :
+					fConstructed (false)
+				{
+				}
+
+				NoConstructorWrapper (const NoConstructorWrapper& rhs) :
+					fConstructed (false)
+				{
+					if (rhs.fConstructed) {
+						new (fItem) T (reinterpret_cast<const T&> (rhs.fItem));
+						fConstructed = true;
+					}
+				}
+
+				explicit	NoConstructorWrapper (T item) :
+					fConstructed (false)
+				{
+					new (fItem) T (reinterpret_cast<const T&> ( item));
+					fConstructed = true;
+				}
+
+				~NoConstructorWrapper ()
+				{
+					DestroyCurrent ();
+				}
+
+				void	operator= (const NoConstructorWrapper& rhs)
+				{
+					DestroyCurrent ();
+					if (rhs.fConstructed) {
+						new (fItem) T (reinterpret_cast<const T&> (rhs.fItem));
+						fConstructed = true;
+					}
+				}
+
+				T   operator* () const
+				{
+					Require (fConstructed);
+					return (*reinterpret_cast<const T*> (&fItem));
+				}
+
+				bool	operator== (const NoConstructorWrapper<T>& rhs) const
+				{
+					return (fConstructed and (memcmp (fItem, rhs.fItem, sizeof (T)) == 0));
+				}
+
+				bool	operator!= (const NoConstructorWrapper<T>& rhs) const
+				{
+					return (not operator== (rhs));
+				}
+
+				T*	AsPointer ()
+				{
+					/*
+						This is the problem. If I pass in this, how can I assure that
+						it gets handled properly? I don't really want to force all the underlying
+						routines to just take raw memory, or do I?
+					*/
+					Require (not fConstructed);
+					T*	item = reinterpret_cast<T*> (&fItem);
+					return item;
+				}
+
+				nonvirtual	void	Clear ()
+				{
+					DestroyCurrent ();
+				}
+
+			private:
+				nonvirtual	void	DestroyCurrent ()
+				{
+					if (fConstructed) {
+						reinterpret_cast<T*> (&fItem)->~T ();
+						fConstructed = false;
+					}
+				}
+
+			private:
+				Byte	fItem[sizeof (T)];
+				bool	fConstructed;
+		};
+
+		template	<typename T>	bool	operator== (const NoConstructorWrapper<T>& lhs, const NoConstructorWrapper<T>& rhs)
+		{
+			return (rhs.fConstructed and lhs.operator== (rhs.fItem));
+		}
+
+		template	<typename T>	bool	operator!= (const NoConstructorWrapper<T>& lhs, const NoConstructorWrapper<T>& rhs)
+		{
+			return not operator== (lhs,rhs);
+		}
+		// end cutting
+
+
             template	<typename T> class	Iterator {
              	public:
 					class	Rep;
@@ -105,7 +202,8 @@ namespace	Stroika {
                     Memory::SharedByValue<Rep>	fIterator;
 
 				private:
-                    T       fCurrent;   // SSW 9/19/2011: naive impementation that requires a no-arg constructor for T and has to build a T before being asked for current
+					NoConstructorWrapper<T>	fCurrent;
+                   // T       fCurrent;   // SSW 9/19/2011: naive impementation that requires a no-arg constructor for T and has to build a T before being asked for current
 
 					static	Rep*	Clone_ (const Rep& rep);
 			};

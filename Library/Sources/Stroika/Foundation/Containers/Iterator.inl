@@ -136,19 +136,27 @@ namespace	Stroika {
             template	<typename T>  inline    T   Iterator<T>::operator* () const
             {
                 RequireNotNull (fIterator);
-                return (fCurrent);
+                return (*fCurrent);
             }
 
             template	<typename T>   inline   void  Iterator<T>::operator++ ()
             {
                 RequireNotNull (fIterator);
-                fIterator->More (&fCurrent, true);
+                NoConstructorWrapper<T> tmp;
+                T*	pT = tmp.AsPointer ();
+                if (fIterator->More (pT, true)) {
+					fCurrent = NoConstructorWrapper<T>(*pT);
+                }
+#if qDebug
+                else {
+                	fCurrent.Clear ();
+                }
+#endif
 			}
 
             template	<typename T>   inline   void  Iterator<T>::operator++ (int)
             {
-                RequireNotNull (fIterator);
-                fIterator->More (&fCurrent, true);
+            	operator++ ();
 			}
 
             template	<typename T> inline bool   Iterator<T>::operator!= (Iterator rhs)  const
